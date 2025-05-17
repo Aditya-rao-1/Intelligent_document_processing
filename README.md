@@ -1,18 +1,20 @@
 
 # 🧠 Intelligent Document Processing with AI-Powered Agent
 
-An AI-powered intelligent agent that extracts, processes, and understands the content of PDF documents from Amazon S3. Using AWS Textract, NLP techniques, Pinecone vector store, and Amazon Titan LLM, it enables context-aware question-answering with multi-turn memory.
+An AI-powered intelligent agent that extracts, processes, evaluates, and understands the content of PDF documents from Amazon S3. Leveraging AWS Textract, NLP, Pinecone, Hugging Face embeddings, and **Amazon Titan LLMs**, it provides **context-aware question answering** with **multi-turn memory**, and **automated model evaluation** for the best responses.
 
 ---
 
 ## 🚀 Features
 
-- 📄 **Text Extraction** from PDF documents stored in **Amazon S3** using **AWS Textract**.
-- 🧹 **Text Preprocessing** using **NLTK** (tokenization, stopword removal, lemmatization).
-- 🔍 **Embedding Generation** with Hugging Face's `multi-qa-mpnet-base-cos-v1` model.
-- 📦 **Vector Storage and Retrieval** via **Pinecone**.
-- 🧠 **Contextual Q&A** using **Amazon Titan LLM** in a **Retrieval-Augmented Generation (RAG)** workflow.
-- 🗣️ **Multi-Turn Conversation Support** with memory for follow-up questions.
+* 📄 **Text Extraction** from PDF documents stored in **Amazon S3** using **AWS Textract**.
+* 🧹 **Text Preprocessing** with **NLTK** (tokenization, stopword removal, lemmatization).
+* 🔍 **Embedding Generation** via **Hugging Face** `multi-qa-mpnet-base-cos-v1`.
+* 📦 **Vector Storage & Retrieval** using **Pinecone**.
+* 🧠 **Retrieval-Augmented Generation (RAG)** using **Amazon Titan Text Express** and **Premier LLMs**.
+* 🗣️ **Multi-Turn Conversations** with persistent memory.
+* 🤖 **Model Evaluation & Scoring** with **semantic similarity and fluency metrics**.
+* 🏆 **Automatic Best Response Selection** from two LLM outputs using scoring logic.
 
 ---
 
@@ -37,7 +39,7 @@ nltk.download('wordnet')
 
 ## 🔐 Setup Credentials
 
-Update your script with the following configuration:
+Update the script with your credentials and configuration:
 
 ```python
 AWS_ACCESS_KEY_ID = 'your-aws-access-key-id'
@@ -55,56 +57,73 @@ PDF_FILE_NAME = 'your-document.pdf'
 
 ## 💡 Usage
 
-1. Upload your PDF to the specified S3 bucket.
-2. Run the script to:
-   - Extract text with **AWS Textract**.
-   - Preprocess with **NLTK**.
-   - Generate and store embeddings in **Pinecone**.
-3. Start the interactive conversation loop and ask context-based questions.
+1. Upload your PDF to your S3 bucket.
+2. Run the script:
+
+   * Extracts text using **AWS Textract**.
+   * Cleans and preprocesses the text.
+   * Splits and embeds the document.
+   * Stores vectors in **Pinecone**.
+3. Enter the interactive conversation loop and ask questions.
 
 ---
 
 ## 🧠 AI Agent Behavior
 
-This system maintains conversational memory for context-aware responses. Example interaction:
+The system uses retrieval-augmented generation and memory to enable deep, context-aware responses. It compares responses from **Titan Express** and **Titan Premier**, then selects the most relevant answer using:
+
+* **Query relevance**
+* **Context alignment**
+* **Fluency scoring**
+
+### Sample Interaction
 
 ```
 User: What was the net revenue of Acme Corp in 2023?
 AI: Acme Corp reported a net revenue of $5.2 million in 2023.
 
 User: What contributed to that growth?
-AI: The main contributors were increased product sales in North America and the launch of their AI-driven analytics platform.
+AI: Growth was driven by increased sales in North America and the launch of a new analytics platform.
 
-User: Was there any decline in other segments?
-AI: Yes, there was a slight decline in the hardware division due to supply chain issues.
+User: Were there any setbacks?
+AI: Yes, the hardware division experienced a decline due to supply chain issues.
 ```
 
 ---
 
-## 💼 Example Use Case
+## 📊 Response Evaluation Logic
 
-If your document is a company’s annual report, you can ask:
+The system scores LLM responses using:
 
-- "What was the profit in 2022?"
-- "Which sectors performed best this year?"
-- "How does this year’s performance compare to last year?"
+* 🔁 **Cosine Similarity** to the original query and the retrieved context.
+* ✍️ **Fluency Score** based on token analysis.
+* 🏅 **Weighted Final Score** to choose the best model's response automatically.
 
-The AI agent uses the document and memory to provide accurate, contextual responses.
+---
+
+## 💼 Example Use Cases
+
+Ask your document anything:
+
+* "Summarize key financials for 2023."
+* "List product launches last year."
+* "What challenges were mentioned in Q4?"
+
+Works great with annual reports, legal documents, research papers, and more.
 
 ---
 
 ## 🌱 Future Enhancements
 
-- 🖥️ Develop a GUI or REST API for user-friendly access.
-- 📚 Support simultaneous processing of multiple documents.
-- 🏢 Integrate with enterprise document processing pipelines.
+* 🖥️ Web UI or REST API for easier interaction.
+* 📚 Multi-document RAG and chunk indexing.
+* 🔐 Role-based access and audit trail for enterprise use.
 
 ---
 
 ## 📬 Contributions & Feedback
 
-Feel free to submit issues, feature requests, or pull requests to help improve this project!
+Have ideas or found a bug? Contributions are welcome—submit issues, feature requests, or PRs to improve this project.
 
 ---
 
-Let me know if you want a version with badges, a license, or contribution guidelines added.
